@@ -16,5 +16,6 @@ $ npm install
 
 ## Requirements
 
-- PHP >= 7.1
+- All Laravel 6.x requirements
+- PHP >= 7.2
 - Employees sample database (https://dev.mysql.com/doc/employee/en/employees-introduction.html)
