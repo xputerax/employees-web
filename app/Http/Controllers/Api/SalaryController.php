@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\DepartmentManager;
+use App\Http\Controllers\Controller;
+use App\Salary;
 use Illuminate\Http\Request;
 
-class DepartmentManagerController extends Controller
+class SalaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class DepartmentManagerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DepartmentManager  $departmentManager
+     * @param  \App\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function show(DepartmentManager $departmentManager)
+    public function show(Salary $salary)
     {
         //
     }
@@ -52,10 +53,10 @@ class DepartmentManagerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\DepartmentManager  $departmentManager
+     * @param  \App\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function edit(DepartmentManager $departmentManager)
+    public function edit(Salary $salary)
     {
         //
     }
@@ -64,10 +65,10 @@ class DepartmentManagerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DepartmentManager  $departmentManager
+     * @param  \App\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DepartmentManager $departmentManager)
+    public function update(Request $request, Salary $salary)
     {
         //
     }
@@ -75,10 +76,10 @@ class DepartmentManagerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\DepartmentManager  $departmentManager
+     * @param  \App\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DepartmentManager $departmentManager)
+    public function destroy(Salary $salary)
     {
         //
     }

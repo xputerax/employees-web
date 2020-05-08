@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Salary;
+use App\Http\Controllers\Controller;
+use App\DepartmentManager;
 use Illuminate\Http\Request;
 
-class SalaryController extends Controller
+class DepartmentManagerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class SalaryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Salary  $salary
+     * @param  \App\DepartmentManager  $departmentManager
      * @return \Illuminate\Http\Response
      */
-    public function show(Salary $salary)
+    public function show(DepartmentManager $departmentManager)
     {
         //
     }
@@ -52,10 +53,10 @@ class SalaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Salary  $salary
+     * @param  \App\DepartmentManager  $departmentManager
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salary $salary)
+    public function edit(DepartmentManager $departmentManager)
     {
         //
     }
@@ -64,10 +65,10 @@ class SalaryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Salary  $salary
+     * @param  \App\DepartmentManager  $departmentManager
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salary $salary)
+    public function update(Request $request, DepartmentManager $departmentManager)
     {
         //
     }
@@ -75,10 +76,10 @@ class SalaryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Salary  $salary
+     * @param  \App\DepartmentManager  $departmentManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Salary $salary)
+    public function destroy(DepartmentManager $departmentManager)
     {
         //
     }

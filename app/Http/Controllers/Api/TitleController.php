@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Employee;
+use App\Http\Controllers\Controller;
+use App\Title;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class TitleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +15,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::take(100)->get();
-        $response = [
-            'success' => true,
-            'data' => $employees,
-            'data_count' => $employees->count()
-        ];
+        $titles = Title::take(100)->get();
 
-        return $response;
+        return [
+            'success' => true,
+            'data' => $titles,
+            'data_count' => $titles->count()
+        ];
     }
 
     /**
@@ -42,41 +42,42 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employee_info = $request->input('employee');
-        $employee = Employee::create($employee_info);
+        $title_info = $request->only([
+            'title.emp_no',
+            'title.title',
+            'title.from_date',
+            'title.to_date'
+        ])['title'];
 
-        $response = [
+        $title = Title::create($title_info);
+
+        return [
             'success' => true,
-            'employee' => $employee
+            'title' => $title
         ];
-
-        return $response;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\Title  $title
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(Title $title)
     {
         return [
             'success' => true,
-            'employee' => $employee,
-            'is_manager' => $employee->is_manager(),
-            'departments' => $employee->departments,
-            'managed_departments' => $employee->managed_departments
+            'title' => $title
         ];
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\Title  $title
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Title $title)
     {
         //
     }
@@ -85,26 +86,33 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
+     * @param  \App\Title  $title
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Title $title)
     {
-        $success = $employee->update($request->employee);
+        $title_info = $request->only([
+            'title.emp_no',
+            'title.title',
+            'title.from_date',
+            'title.to_date'
+        ])['title'];
+
+        $success = $title->update($title_info);
 
         return [
             'success' => $success,
-            'employee' => $employee
+            'title' => $title
         ];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\Title  $title
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Title $title)
     {
         //
     }

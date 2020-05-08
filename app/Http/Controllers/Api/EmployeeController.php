@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Title;
+use App\Http\Controllers\Controller;
+use App\Employee;
 use Illuminate\Http\Request;
 
-class TitleController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,14 @@ class TitleController extends Controller
      */
     public function index()
     {
-        $titles = Title::take(100)->get();
-
-        return [
+        $employees = Employee::take(100)->get();
+        $response = [
             'success' => true,
-            'data' => $titles,
-            'data_count' => $titles->count()
+            'data' => $employees,
+            'data_count' => $employees->count()
         ];
+
+        return $response;
     }
 
     /**
@@ -41,42 +43,41 @@ class TitleController extends Controller
      */
     public function store(Request $request)
     {
-        $title_info = $request->only([
-            'title.emp_no',
-            'title.title',
-            'title.from_date',
-            'title.to_date'
-        ])['title'];
+        $employee_info = $request->input('employee');
+        $employee = Employee::create($employee_info);
 
-        $title = Title::create($title_info);
-
-        return [
+        $response = [
             'success' => true,
-            'title' => $title
+            'employee' => $employee
         ];
+
+        return $response;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Title  $title
+     * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Title $title)
+    public function show(Employee $employee)
     {
         return [
             'success' => true,
-            'title' => $title
+            'employee' => $employee,
+            'is_manager' => $employee->is_manager(),
+            'departments' => $employee->departments,
+            'managed_departments' => $employee->managed_departments
         ];
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Title  $title
+     * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Title $title)
+    public function edit(Employee $employee)
     {
         //
     }
@@ -85,33 +86,26 @@ class TitleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Title  $title
+     * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Title $title)
+    public function update(Request $request, Employee $employee)
     {
-        $title_info = $request->only([
-            'title.emp_no',
-            'title.title',
-            'title.from_date',
-            'title.to_date'
-        ])['title'];
-
-        $success = $title->update($title_info);
+        $success = $employee->update($request->employee);
 
         return [
             'success' => $success,
-            'title' => $title
+            'employee' => $employee
         ];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Title  $title
+     * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Title $title)
+    public function destroy(Employee $employee)
     {
         //
     }
