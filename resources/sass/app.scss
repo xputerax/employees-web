@@ -1,57 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap');
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-* {
-    padding: 0px;
-    margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-}
+// Variables
+@import 'variables';
 
-.container {
-    margin: 2em;
-}
-
-.site-header {
-    // background-color: red;
-    // background-color: aquamarine;
-    text-align: center;
-    // padding: 3em;
-    padding: 1em 0.5em 1em 0.5em;
-}
-
-.header-title {
-    font-family: 'Beth Ellen', cursive;
-    font-size: 4em;
-    // background-color: grey;
-}
-
-.header-description {
-    font-family: serif;
-    font-size: 1em;
-    font-weight: lighter;
-    // background-color: grey;
-}
-
-.navbar {
-    width: 100%;
-    font-size: 1em;
-    text-align: center;
-    background: aquamarine;
-}
-
-.navbar li {
-    background: grey;
-}
-
-.navbar a {
-    text-decoration: none;
-    margin: 1em;
-}
-
-.navbar ul, .navbar li {
-    list-style-type: none;
-    display: inline-block;
-}
-
-.navbar .navbar-item-collapse {
-    display: none;
-}
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
