@@ -62,6 +62,11 @@ class DepartmentController extends Controller
         return [
             'success' => true,
             'department' => $department,
+            'managers' => [
+                'data_count' => $department->managers()->count(),
+                'data' => $department->managers
+            ],
+            'num_employees' => $department->employees()->count(),
         ];
     }
 
