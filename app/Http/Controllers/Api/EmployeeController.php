@@ -109,4 +109,15 @@ class EmployeeController extends Controller
     {
         //
     }
+
+    public function salaries(Employee $employee)
+    {
+        return [
+            'success' => true,
+            'salaries' => [
+                'data_count' => $employee->salaries()->count(),
+                'data' => $employee->salaries
+            ]
+        ];
+    }
 }
