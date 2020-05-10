@@ -1,5 +1,7 @@
 <template>
-  <div class="post">
+  <div class="container">
+    <h2>Home</h2>
+
     <div v-if="loading" class="loading">
       Loading...
     </div>
@@ -31,7 +33,6 @@ export default {
       employees: null,
       employees_count: null,
       error: null,
-      message: 'hello world'
     }
   },
 

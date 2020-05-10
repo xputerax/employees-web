@@ -1,46 +1,52 @@
 <template>
-  <div>
+  <div class="container">
     <span v-if="loading">Loading...</span>
 
-    <div v-if="employee && !loading">
-      <h2>{{ `${employee.first_name} ${employee.last_name}` }}</h2>
-      <span>Birth date: {{ employee.birth_date }}</span> <br>
-      <span>Is manager: {{ is_manager }}</span>
+    <div v-if="employee && !loading" class="row">
+      <div class="col-md-12">
+        <h2>{{ `${employee.first_name} ${employee.last_name}` }}</h2>
+        <span>Birth date: {{ employee.birth_date }}</span> <br>
+        <span>Is manager: {{ is_manager }}</span>
+      </div>
     </div>
 
-    <div v-if="is_manager">
-      <h3>Managed Departments</h3>
-      <ol>
-        <li v-for="dept in managed_departments" :key="dept.dept_no">
-          <router-link :to="{ name: 'single-department', params: { id: dept.dept_no }}">
-            {{ dept.dept_name }}
-          </router-link>
-        </li>
-      </ol>
+    <div v-if="is_manager" class="row">
+      <div class="col-md-12">
+       <h3>Managed Departments</h3>
+        <ol>
+          <li v-for="dept in managed_departments" :key="dept.dept_no">
+            <router-link :to="{ name: 'single-department', params: { id: dept.dept_no }}">
+              {{ dept.dept_name }}
+            </router-link>
+          </li>
+        </ol>
+      </div>
     </div>
 
-    <div v-if="salaries">
-      <h3>Salaries</h3>
+    <div v-if="salaries" class="row">
+      <div class="col-md-6">
+        <h3>Salaries</h3>
 
-      <table id="salaries">
-        <thead>
-          <th>From Date</th>
-          <th>To Date</th>
-          <th>Amount ($)</th>
-        </thead>
+        <table class="table table-bordered table-condensed" id="salaries">
+          <thead>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Amount ($)</th>
+          </thead>
 
-        <tbody>
-          <tr v-for="salary in salaries" :key="salary.salary">
-            <td>{{ salary.from_date }}</td>
-            <td>{{ salary.to_date }}</td>
-            <td>{{ salary.salary }}</td>
-          </tr>
-          <tr>
-            <td colspan="2">Average</td>
-            <td>{{ avg_salary }}</td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr v-for="salary in salaries" :key="salary.salary">
+              <td>{{ salary.from_date }}</td>
+              <td>{{ salary.to_date }}</td>
+              <td>{{ salary.salary }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">Average</td>
+              <td>{{ avg_salary }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -99,6 +105,7 @@ export default {
       })
 
       this.avg_salary /= this.num_salaries
+      this.avg_salary = this.avg_salary.toFixed(2)
 
     }
   }
@@ -106,7 +113,7 @@ export default {
 </script>
 
 <style>
-table#salaries {
+/* table#salaries {
   text-align: center;
   width: 50%;
   border: 1px solid #000000;
@@ -118,5 +125,5 @@ table#salaries thead th {
 
 table#salaries tbody tr td {
   border-bottom: 1px solid #000000;
-}
+} */
 </style>
