@@ -22,7 +22,7 @@ class Employee extends Model
 
     public function salaries()
     {
-        return $this->hasMany(Salary::class);
+        return $this->hasMany(Salary::class, 'emp_no', 'emp_no');
     }
 
     public function titles()
