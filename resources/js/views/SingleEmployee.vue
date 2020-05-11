@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <span v-if="loading">Loading...</span>
+    <div v-if="loading">Loading...</div>
 
-    <div v-if="employee && !loading" class="row">
+    <div v-if="employee" class="row">
       <div class="col-md-12">
         <h2>{{ `${employee.first_name} ${employee.last_name}` }}</h2>
         <span>Birth date: {{ employee.birth_date }}</span> <br>
@@ -10,16 +10,59 @@
       </div>
     </div>
 
-    <div v-if="is_manager" class="row">
-      <div class="col-md-12">
+    <div v-if="departments" class="row">
+      <div class="col-md-6">
+        <h3>Departments</h3>
+
+        <table class="table table-bordered table-sm" id="departments">
+          <thead>
+            <th class="col-md-4">From Date</th>
+            <th class="col-md-4">To Date</th>
+            <th class="col-md-4">Department Name</th>
+          </thead>
+
+          <tbody>
+            <tr v-for="dept in departments" :key="dept.dept_no">
+              <td>{{ dept.pivot.from_date }}</td>
+              <td>{{ dept.pivot.to_date }}</td>
+              <td>
+                <router-link :to="{ name: 'single-department', params: { id: dept.dept_no } }">{{ dept.dept_name }}</router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div v-if="managed_departments" class="row">
+      <div class="col-md-6">
        <h3>Managed Departments</h3>
-        <ol>
-          <li v-for="dept in managed_departments" :key="dept.dept_no">
-            <router-link :to="{ name: 'single-department', params: { id: dept.dept_no }}">
-              {{ dept.dept_name }}
-            </router-link>
-          </li>
-        </ol>
+
+        <table class="table table-bordered table-sm" id="managed_departments">
+          <thead>
+            <th class="col-md-4">From Date</th>
+            <th class="col-md-4">To Date</th>
+            <th class="col-md-4">Department Name</th>
+          </thead>
+
+          <tbody>
+          <template v-if="managed_departments.length">
+            <tr v-for="dept in managed_departments" :key="dept.dept_no">
+              <td>{{ dept.pivot.from_date }}</td>
+              <td>{{ dept.pivot.to_date }}</td>
+              <td>
+                <router-link :to="{ name: 'single-department', params: { id: dept.dept_no } }">{{ dept.dept_name }}</router-link>
+              </td>
+            </tr>
+          </template>
+
+          <template v-else>
+            <tr>
+              <td colspan="3">No data</td>
+            </tr>
+          </template>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -27,7 +70,7 @@
       <div class="col-md-6">
         <h3>Salaries</h3>
 
-        <table class="table table-bordered table-condensed" id="salaries">
+        <table class="table table-bordered table-sm" id="salaries">
           <thead>
             <th>From Date</th>
             <th>To Date</th>
@@ -38,11 +81,12 @@
             <tr v-for="salary in salaries" :key="salary.salary">
               <td>{{ salary.from_date }}</td>
               <td>{{ salary.to_date }}</td>
-              <td>{{ salary.salary }}</td>
+              <td class="col-md-2 text-right">{{ salary.salary }}</td>
             </tr>
             <tr>
-              <td colspan="2">Average</td>
-              <td>{{ avg_salary }}</td>
+              <td></td>
+              <td class="text-center">Average</td>
+              <td class="text-right">{{ avg_salary }}</td>
             </tr>
           </tbody>
         </table>
@@ -111,19 +155,3 @@ export default {
   }
 }
 </script>
-
-<style>
-/* table#salaries {
-  text-align: center;
-  width: 50%;
-  border: 1px solid #000000;
-}
-
-table#salaries thead th {
-  border-bottom: 1px solid #000000;
-}
-
-table#salaries tbody tr td {
-  border-bottom: 1px solid #000000;
-} */
-</style>
