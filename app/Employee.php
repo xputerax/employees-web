@@ -32,16 +32,20 @@ class Employee extends Model
 
     public function is_manager()
     {
-        return DepartmentManager::where('emp_no', $this->emp_no)->count() > 0;
+        return DepartmentManager::where('emp_no', $this->emp_no)
+            ->whereRaw('year(to_date) >= year(now())')
+            ->count() > 0;
     }
 
     public function departments()
     {
-        return $this->belongsToMany(Department::class, 'dept_emp', 'emp_no', 'dept_no');
+        return $this->belongsToMany(Department::class, 'dept_emp', 'emp_no', 'dept_no')
+            ->withPivot(['from_date', 'to_date']);
     }
 
     public function managed_departments()
     {
-        return $this->belongsToMany(Department::class, 'dept_manager', 'emp_no', 'dept_no');
+        return $this->belongsToMany(Department::class, 'dept_manager', 'emp_no', 'dept_no')
+            ->withPivot(['from_date', 'to_date']);
     }
 }
